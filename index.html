@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>   
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        /* function Title(){
+            return (
+                <h3 id="title" onMouseEnter={() => console.log("I am entered")}>
+                    Hello I am Title</h3>
+            );
+        } */
+        /* const Button = ()=> (
+            <button 
+                style={{
+                    backgroundColor : "yellow",
+                }}
+                onClick={() => console.log("I am clicked")}
+            >
+            Click me
+            </button>
+        );  */
+        /*  const h3 = React.createElement("h3",{
+            id:"title",
+            onMouseEnter:() => console.log("I am entered")
+        }, "Hello I am span"); */
+       /*  const btn = React.createElement("button",{
+            onClick:() => console.log("I am clicked"),
+            style:{
+                backgroundColor : "yellow",
+            },
+        }, "Click me"); */
+        
+        /* let counter = 0;
+        function render(){
+            ReactDOM.render(<App />, root);
+        }
+        function countUp(){
+            counter+=1;
+            render(); //render해 주는 것을 잊으면 안되기 때문에 최고의 방법은 아님.
+        } */
+        
+        function App() {
+            const [counter, setCounter] = React.useState(0); //[undefined, f] 여기서 data는 undefined이고 f는 data가 변화할 때 사용하는 함수를 의미함.
+            const onClick = () => {
+                //setCounter(counter+1); 하나의 방법
+                setCounter((current)=>current+1); //이 방법이 더 안전해. 현재값을 확실히 할 수 있음.
+            }; 
+            return(
+                <div>
+                    <h3>Total clicks: {counter}</h3>
+                    <button onClick={onClick}>Click me</button>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, root);
+    </script>
+</html>

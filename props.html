@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>   
+    </body>
+    <script src=" https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+       function Btn({btnName, changeValue, fontSize}){
+            return (
+                <button
+                    fontSize
+                    onClick = {changeValue} 
+                    style={{
+                        backgroundColor:"yellow",
+                        color:"black",
+                        padding:"10px 20px",
+                        border: 0,
+                        borderRadius:10
+                    }}>{btnName}</button>
+            );
+        }
+        Btn.propTypes ={
+            text: PropTypes.string,
+            fontSize: PropTypes.number,
+        };
+       function ConfirmBtn(){
+           return <button>Confirm</button>
+       }
+       //memo 기능을 통해 props가 변경되지 않은 것은 rendered할 필요 없음을 알려줌.
+       //const MemorizedBtn = React.memo(Btn)
+        function App() {
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => setValue("Revert Changes");
+            return(
+                <div>
+                {/*밑의 onClick은 이벤트 리스너가 아니라 하나의 prop*/}
+                    <Btn btnName={value} changeValue={changeValue} />
+                    <Btn btnName={14} fontSize={"Continue"}/>
+                </div>
+            );
+        }
+        ReactDOM.render(<App />, root);
+    </script>
+</html>
